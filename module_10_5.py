@@ -1,26 +1,28 @@
 import time
-import multiprocessing
+from multiprocessing import Pool
 
 def read_info(name):
     all_data = []
     with open(name, 'r') as file:
-        line = file.readline()
-    while line:
-      all_data.append(line)
-      line = file.readline()
+        while True:
+            line = file.readline()
+            if not line:
+                break
+            all_data.append(line.strip())  
 
 if __name__ == '__main__':
-    filenames = [f'./file{number}.txt' for number in range(1, 5)]
-    start_time = time.time()
-for filename in filenames:
-     read_info(filename)
-     end_time = time.time()
-     print(f"Время выполнения линейно: {time.strftime('%H:%M:%S', time.gmtime(end_time - start_time))}")
+    filenames = [f'./file {number}.txt' for number in range(1, 5)]
 
-  # Многопроцессный вызов
-  # 
-start_time = time.time()
-with multiprocessing.Pool(processes=4) as pool: # Используем 4 процесса
-    pool.map(read_info, filenames)
-    end_time = time.time()
-    print(f"Время выполнения многопроцессным: {time.strftime('%H:%M:%S', time.gmtime(end_time - start_time))}")
+    # Линейный вызов
+    start_time = time.time()
+    for filename in filenames:
+        read_info(filename)
+    linear_time = time.time() - start_time
+    print(f"{linear_time:.6f} (линейный)")
+
+    # Многопроцессный вызов
+    start_time = time.time()
+    with Pool() as pool:
+        pool.map(read_info, filenames)
+    multiprocessing_time = time.time() - start_time
+    print(f"{multiprocessing_time:.6f} (многопроцессный)")
