@@ -1,12 +1,12 @@
 import asyncio
-from time import sleep
+
 
 
 async def start_strongman( name, power):
     print(f"Силач {name} начал соревнования.")
     for i in range(1,6):
         print(f"Силач {name} поднял {i}")
-        await asyncio.sleep(power)
+        await asyncio.sleep(1/power)
         print(f"Силач {name} закончил соревнования.")
 async def start_tournament():
     task1 = asyncio.create_task(start_strongman('Pasha', 3))
