@@ -7,7 +7,7 @@ import asyncio
  
 
 
-bot = Bot(token='7558583844:AAGGE3cmcqtXjM-wYpqXjrry-nwB0waQFrY')
+bot = Bot(token='')
 dp = Dispatcher(bot, storage=MemoryStorage())
 
 
