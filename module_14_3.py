@@ -85,7 +85,7 @@ async def start(message):
 async def get_buying_list(message):
     for i in range(1, 5):
         await message.answer(f'Название: Product{i} | Описание: описание {i} | Цена: {i*100}p')
-        with open(f'/Users/miron/PycharmProjects/Urban/UrbanProject/output/module14/{i}.png', "rb") as img:
+        with open(f'C:\Users\админ\Desktop\курс\module_14_1/{i}.png', "rb") as img:
             await message.answer_photo(img)
     await message.answer('Выберите продукт для покупки:', reply_markup=product_inl)
 
